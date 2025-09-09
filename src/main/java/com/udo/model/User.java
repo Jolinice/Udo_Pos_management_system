@@ -29,6 +29,8 @@ public class User {
     private String email;
 
     private String phone;
+
+    @Column(nullable = false)
     private String password;
 
     @Column(nullable = false)
