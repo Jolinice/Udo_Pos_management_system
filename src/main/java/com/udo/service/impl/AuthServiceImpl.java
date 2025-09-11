@@ -1,6 +1,8 @@
 package com.udo.service.impl;
 
 import com.udo.configuration.JwtProvider;
+import com.udo.exceptions.UserException;
+import com.udo.model.User;
 import com.udo.payload.DTO.UserDTO;
 import com.udo.payload.response.AuthResponse;
 import com.udo.repository.UserRepository;
@@ -18,7 +20,11 @@ public class AuthServiceImpl implements AuthService {
     private final CustomUserImplementation customUserImplementation;
 
     @Override
-    public AuthResponse signup(UserDTO userDTO) {
+    public AuthResponse signup(UserDTO userDTO) throws UserException {
+        User user = userRepository.findByEmail(userDTO.getEmail());
+        if(user != null){
+            throw new UserException("Email id already registered");
+        }
         return null;
     }
 
